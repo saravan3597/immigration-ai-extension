@@ -1,3 +1,2 @@
 # immigration-ai-extension
-
-A Chrome extension that uses automates UI actions
+Chrome extension that automates repetitive web actions depending on the input script
