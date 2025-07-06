@@ -1,0 +1,168 @@
+{
+  "Name": "ETA9035",
+  "CreationDate": "2025-7-6",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "Form ETA-9035/9035E",
+      "Value": "FormName",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "H-1B",
+      "Value": "a1_visa_type",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://flag.dol.gov/dashboard",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "linkText=${FormName}",
+      "Value": "",
+      "Targets": [
+        "linkText=${FormName}",
+        "xpath=//*[@id=\"main-content\"]/div/div/div/div[2]/div[3]/div[3]/p/a",
+        "xpath=//div[3]/div[3]/p/a",
+        "css=#main-content > div > div > div > div.usa-application-container > div:nth-child(3) > div:nth-child(3) > p.usa-link > a"
+      ],
+      "Description": ""
+    },
+    {
+      "Command": "verifyElementPresent",
+      "Target": "//b[text()='Case re-use?']",
+      "Value": "found_case",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "caseReusePresent",
+      "Description": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!statusOK} == true",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "//button[text()='Start new']",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//label[./span[text()='${a1_visa_type}']][@class='usa-radio__label']",
+      "Value": "",
+      "Description": "A.1. Indicate the type of visa classification supported by this application"
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[@id='formContainer'][.//h1[text()='Employment-Based Nonimmigrant Visa Information']]//button[text()='Continue']",
+      "Value": "",
+      "Description": "Continue from Employment-Based Nonimmigrant Visa Information"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[@class='usa-label' and contains(.,'B.1. Job Title')]]//input",
+      "Value": "Engineer",
+      "Description": "B.1. Job Title"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[@class='usa-label' and contains(.,'B.1. Job Title')]]//input",
+      "Value": "Software Engineer",
+      "Description": "B.1. Job Title"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[@class='usa-label' and contains(.,'B.2/B.3. SOC (ONET/OES) Code and Occupation Title')]]//input",
+      "Value": "15-1252.00 —— Software Developers",
+      "Description": "B.2/B.3. SOC (ONET/OES) Code and Occupation Title"
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[@class='usa-label' and contains(.,'B.4. Is this a full-time position?')]]//input[@value='YES']/following-sibling::label",
+      "Value": "",
+      "Description": "B.4. Full Time?"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=(//div[@class='usa-form-group'][.//label[@class='usa-label' and contains(.,'B.5. Begin Date')]])[2]//input",
+      "Value": "08/01/2025",
+      "Description": "B.5. Begin Date"
+    },
+    {
+      "Command": "XType",
+      "Target": "${KEY_ESC}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=(//div[@class='usa-form-group'][.//label[@class='usa-label' and contains(.,'B.6. End Date')]])[2]//input",
+      "Value": "09/01/2025",
+      "Description": "B.6. End Date"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'B.7. Total Worker Positions Being Requested for Certification*Click tooltip for more information')]]//input",
+      "Value": "2",
+      "Description": "B.7. Total Worker Positions Being Requested for Certification"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'a. New Employment*')]]//input",
+      "Value": "1",
+      "Description": "B.7.a New Employment"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'b. Continuation of previously approved employment without change with the same employer*')]]//input",
+      "Value": "0",
+      "Description": "B.7.b Continuation of previously approved employment"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'c. Change in previously approved employment*')]]//input",
+      "Value": "1",
+      "Description": "B.7.c Change in previously approved employment"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'d. New concurrent employment*')]]//input",
+      "Value": "0",
+      "Description": "B.7.d New concurrent employment"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'e. Change in employer*')]]//input",
+      "Value": "0",
+      "Description": "B.7.e Change in employer"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//div[@class='usa-form-group'][.//label[contains(.,'f. Amended petition*')]]//input",
+      "Value": "0",
+      "Description": "B.7.f Amended petition"
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//div[@id='formContainer'][.//h1[text()='Temporary Need Information']]//button[text()='Continue']",
+      "Value": "",
+      "Description": "Continue from Temporary Need Information"
+    }
+  ]
+}
