@@ -14,14 +14,30 @@ const DELAY_BETWEEN_COMMANDS_MS = 800;
 const ELEMENT_WAIT_TIMEOUT_MS = 5000;
 const ELEMENT_WAIT_INTERVAL_MS = 300;
 
-const runExecutionEngine = async () => {
+window.addEventListener("message", (event) => {
+  if (event.data && event.data.source === "FVIMMIGRATION_AI_EXT") {
+    console.log("Received from extension:", event.data.payload);
+    runExecutionEngine();
+  }
+});
+
+window.onload = () => {
+  const executingCommand = localStorage.getItem(
+    "FVIMMIGRATION_AI_EXECUTING_COMMAND"
+  );
+  if (executeCommand) runExecutionEngine(executingCommand);
+};
+
+const runExecutionEngine = async (commandIndex) => {
   const script = await fetchScript(COMMANDS_FILE_PATH);
   const variables = {};
   const commandsQueue = [...script.Commands];
-
+  if (commandIndex) commandsQueue.splice(0, commandIndex);
+  let executingCommand = 0;
   while (commandsQueue.length) {
+    executingCommand++;
     const command = commandsQueue.shift();
-    await executeCommand(command, variables, commandsQueue);
+    await executeCommand(command, variables, commandsQueue, executingCommand);
     await delay(DELAY_BETWEEN_COMMANDS_MS);
   }
 };
@@ -31,7 +47,12 @@ const fetchScript = async (path) => {
   return response.json();
 };
 
-const executeCommand = async (command, variables) => {
+const executeCommand = async (
+  command,
+  variables,
+  commandsQueue,
+  executingCommand
+) => {
   let target = substituteVariables(command.Target, variables);
   let value = substituteVariables(command.Value, variables);
 
@@ -45,6 +66,10 @@ const executeCommand = async (command, variables) => {
     case "open":
       if (window.location.href !== target) {
         window.location.href = target;
+        localStorage.setItem(
+          "FVIMMIGRATION_AI_EXECUTING_COMMAND",
+          executingCommand + 1
+        );
         return;
       }
       break;

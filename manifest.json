@@ -14,12 +14,13 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./content/content.js"]
+      "js": ["./content/content.js"],
+      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["assets/*", "commands/*"],
+      "resources": ["assets/*", "commands/*.json"],
       "matches": ["<all_urls>"]
     }
   ],
